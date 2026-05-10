@@ -40,4 +40,4 @@ This document outlines the recent major upgrades integrated into the APJ-AI Cogn
 3.  **Security:** The system is now significantly more resistant to common web vulnerabilities (CORS, DOS, etc.), making it safe for public deployment.
 
 ---
-*Created by Antigravity - May 2026*
+
