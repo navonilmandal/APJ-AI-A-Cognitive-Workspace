@@ -1,14 +1,30 @@
-# Cognitive Assistant V2 - Requirements
+# APJ-AI: Unified Requirements Manifest
+
+# --- Core Web Frameworks ---
 fastapi
 uvicorn
+flask
+requests
+httpx
+python-dotenv
+
+# --- Cognitive Orchestration & Routing ---
 pydantic
 pydantic-settings
-python-dotenv
-pandas
-sentence-transformers
-faiss-cpu
+pathlib
+
+# --- AI Models & Inference ---
+google-generativeai
+groq
 llama-cpp-python
 huggingface_hub
 torch
-pathlib
+sentence-transformers
+
+# --- Memory & Vector Search ---
 qdrant-client
+faiss-cpu
+
+# --- Intelligence Tools ---
+duckduckgo-search
+pandas
