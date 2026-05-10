@@ -1,19 +1,68 @@
-# Models (Large Files)
-models/
-*.gguf
-
-# Memory & Artifacts
-artifacts/
-*.faiss
-*.json
-
-# Python & Environment
+# Python
 __pycache__/
 *.pyc
-.env
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtual Environments
 venv/
+.env/
 .venv/
+env/
+
+# Environment Files
+.env
+.env.local
+.env.*
 
 # Logs
+logs/
 *.log
+app.log
 streamlit_error.log
+
+# Qdrant Data
+qdrant_storage/
+qdrant_data/
+
+# Ollama / Models
+models/
+*.bin
+*.gguf
+*.safetensors
+hf_cache/
+
+# Uploads
+temp_uploads/
+uploads/
+
+# Frontend
+node_modules/
+.next/
+dist/
+.vercel
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Cache
+.cache/
+.pytest_cache/
+cache/
+
+# Data & Datasets
+data/raw/
+data/processed/
+data/*.csv
+data/*.jsonl
+data/*.parquet
+artifacts/
+reports/*.pdf
+reports/*.json
+scratch/

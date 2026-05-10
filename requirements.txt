@@ -1,12 +1,14 @@
-flask
-flask-cors
+# Cognitive Assistant V2 - Requirements
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+python-dotenv
 pandas
 sentence-transformers
 faiss-cpu
-transformers
-torch
-pydantic
-accelerate
-python-dotenv
+llama-cpp-python
 huggingface_hub
-sentencepiece
+torch
+pathlib
+qdrant-client
