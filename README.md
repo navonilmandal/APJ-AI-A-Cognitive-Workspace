@@ -8,7 +8,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Production-green)
 ![Flask](https://img.shields.io/badge/Frontend-Flask-black)
 ![Qdrant](https://img.shields.io/badge/VectorDB-Qdrant-red)
-![Ollama](https://img.shields.io/badge/LocalLLM-Ollama-orange)
+![Qwen](https://img.shields.io/badge/LocalLLM-OLLAMA|Qwen-orange)
 ![Gemini](https://img.shields.io/badge/CloudAI-Gemini-blueviolet)
 
 ![Workspace Preview](images/workspace_preview.png)
