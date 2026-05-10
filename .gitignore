@@ -62,6 +62,8 @@ data/processed/
 data/*.csv
 data/*.jsonl
 data/*.parquet
+data/*.db
+data/*.json
 artifacts/
 reports/*.pdf
 reports/*.json

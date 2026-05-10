@@ -1,4 +1,10 @@
-# APJ-AI: Unified Requirements Manifest
+# --- Security & Auth ---
+passlib[bcrypt]
+python-jose[cryptography]
+slowapi
+python-multipart
+bcrypt
+email-validator
 
 # --- Core Web Frameworks ---
 fastapi

@@ -12,13 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const groundingList = document.getElementById('grounding-list');
     const retrievalIndicator = document.getElementById('retrieval-indicator');
     
-    // User Identity Logic
-    let userId = localStorage.getItem('apj_user_id');
-    if (!userId) {
-        userId = 'user_' + Math.random().toString(36).substring(2, 11);
-        localStorage.setItem('apj_user_id', userId);
+    // Auth Logic
+    let token = localStorage.getItem('apj_auth_token');
+    let username = localStorage.getItem('apj_username');
+
+    function checkAuth() {
+        if (!token) {
+            window.location.href = "/auth";
+        }
     }
-    console.log(`[IDENTITY] Session active for: ${userId}`);
+
+    checkAuth();
+    
+    // User Identity Logic
+    let userId = username || 'guest';
+    console.log(`[SECURITY] Session active for: ${userId}`);
 
     // Auto-resize textarea
     userInput.addEventListener('input', () => {
@@ -44,6 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('apj_auth_token');
+            localStorage.removeItem('apj_username');
+            window.location.href = "/auth";
+        });
+    }
+
     async function sendMessage() {
         const message = userInput.value.trim();
         if (!message) return;
@@ -65,7 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`${window.BACKEND_URL}/chat`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({ 
                     query: message,
                     user_id: userId
@@ -222,16 +242,20 @@ document.addEventListener('DOMContentLoaded', () => {
             // userId is defined in the outer scope
             
             // Fetch reflections
-            const refResp = await fetch(`${window.BACKEND_URL}/reflection/list?user_id=${userId}`);
+            const refResp = await fetch(`${window.BACKEND_URL}/reflection/list`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             const reflections = await refResp.json();
             reflectionCount.textContent = reflections.length;
 
             // Simple way to get memory count (search with empty query might work depending on implementation)
             // Or just hardcode/estimate for now if there's no direct count endpoint
             // I'll try to use a dummy search
-            const memResp = await fetch(`${window.BACKEND_URL}/memory/search?query=&user_id=${userId}`);
+            const memResp = await fetch(`${window.BACKEND_URL}/memory/search?query=`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             const memories = await memResp.json();
-            memoryCount.textContent = memories.length + "+"; // Placeholder for total
+            memoryCount.textContent = (memories.length || 0) + "+"; // Placeholder for total
 
         } catch (e) {
             console.warn("Could not refresh stats", e);
