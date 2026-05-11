@@ -1,0 +1,36 @@
+# --- Security & Auth ---
+passlib[bcrypt]
+python-jose[cryptography]
+slowapi
+python-multipart
+bcrypt
+email-validator
+
+# --- Core Web Frameworks ---
+fastapi
+uvicorn
+flask
+requests
+httpx
+python-dotenv
+
+# --- Cognitive Orchestration & Routing ---
+pydantic
+pydantic-settings
+pathlib
+
+# --- AI Models & Inference ---
+google-generativeai
+groq
+llama-cpp-python
+huggingface_hub
+torch
+sentence-transformers
+
+# --- Memory & Vector Search ---
+qdrant-client
+faiss-cpu
+
+# --- Intelligence Tools ---
+duckduckgo-search
+pandas

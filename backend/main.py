@@ -1,6 +1,7 @@
 import os
 import sys
 from pathlib import Path
+from datetime import datetime
 
 # Add project root to sys.path for direct script execution
 project_root = Path(__file__).resolve().parent.parent
@@ -89,6 +90,38 @@ def create_app() -> FastAPI:
                 ))
         except Exception as e:
             logger.error(f"Failed to create/verify admin user: {e}")
+
+    @app.get("/health")
+    async def health_check():
+        return {
+            "status": "healthy",
+            "timestamp": datetime.utcnow().isoformat(),
+            "version": "2.0.0"
+        }
+
+    @app.get("/health/db")
+    async def db_health():
+        from backend.database import engine
+        from sqlalchemy import text
+        try:
+            with engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+            return {"status": "connected", "database": "postgresql"}
+        except Exception as e:
+            logger.error(f"DB Health Check Failed: {e}")
+            return {"status": "disconnected", "error": str(e)}, 503
+
+    @app.get("/health/qdrant")
+    async def qdrant_health():
+        from backend.memory.qdrant_client import get_qdrant_client
+        try:
+            client = get_qdrant_client()
+            # Try a simple collection list or version check
+            client.get_collections()
+            return {"status": "connected", "storage": "qdrant"}
+        except Exception as e:
+            logger.error(f"Qdrant Health Check Failed: {e}")
+            return {"status": "disconnected", "error": str(e)}, 503
 
     @app.get("/")
     @limiter.limit("5/minute")

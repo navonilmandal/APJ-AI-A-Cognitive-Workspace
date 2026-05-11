@@ -929,6 +929,52 @@ While the system still has limitations, it establishes a strong foundation for f
 
 
 
+# 🐳 Dockerization & Containerization
+
+APJ-AI is fully containerized for production-ready deployment. The platform uses a multi-container architecture to ensure scalability, persistence, and isolation.
+
+## Services
+- **Backend**: FastAPI-powered cognitive engine.
+- **Frontend**: Flask-based cinematic UI.
+- **Database**: PostgreSQL for secure authentication and metadata storage.
+- **Vector DB**: Qdrant for persistent semantic memory and reflections.
+
+## Prerequisites
+- Docker and Docker Compose installed on your system.
+- API keys for Gemini, Groq, or OpenRouter.
+
+## Quick Start (Production)
+
+1. **Configure Environment Variables**:
+   Copy `.env.example` to `.env` and fill in your API keys:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Launch the Platform**:
+   Run the following command to build and start all services:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Access the Application**:
+   - **Frontend**: [http://localhost:5000](http://localhost:5000)
+   - **Backend API**: [http://localhost:8000/docs](http://localhost:8000/docs)
+   - **Qdrant Dashboard**: [http://localhost:6333/dashboard](http://localhost:6333/dashboard)
+
+## Health Monitoring
+The system includes built-in health checks for all critical services:
+- API Status: `http://localhost:8000/health`
+- Database Connectivity: `http://localhost:8000/health/db`
+- Vector Store Status: `http://localhost:8000/health/qdrant`
+
+## Troubleshooting
+- **Database Connection**: Ensure the `postgres` container is healthy. The backend will wait for it to be ready.
+- **Vector Store**: If Qdrant fails to initialize, check the `qdrant_data` volume permissions.
+- **CORS Errors**: Verify that `ALLOWED_ORIGINS` in your `.env` includes your frontend URL.
+
+---
+
 # 🏁 Conclusion
 
 APJ-AI represents a shift from traditional chatbot systems toward persistent AI cognition.

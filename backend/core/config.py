@@ -24,6 +24,9 @@ class Config:
         path.mkdir(parents=True, exist_ok=True)
         
     # Qdrant Settings
+    QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
+    QDRANT_PORT = int(os.getenv("QDRANT_PORT", 6333))
+    QDRANT_URL = os.getenv("QDRANT_URL") # If set, takes precedence over host/port
     QDRANT_PATH = QDRANT_DATA / "local_storage"
     DEFAULT_COLLECTION = "conversational_memory"
     
